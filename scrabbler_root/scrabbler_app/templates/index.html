@@ -8,14 +8,14 @@
     <table class="table table-striped">
     <thead>
       <tr>
-        <th class="text-center">Firstname</th>
+        <th class="text-center">name</th>
         <th class="text-center">Average Score</th>
       </tr>
     </thead>
     <tbody>
       {% for person in users %}
       <tr>
-        <td><a href="profile/{{ person.0.pk }}">{{ person.0.firstName }} {{ person.0.surname }}</a></td>
+        <td><a href="profile/{{ person.0.pk }}">{{ person.0.name }} {{ person.0.surname }}</a></td>
         <td>{{ person.1 }}</td>
       </tr>
       {% endfor %}
@@ -24,14 +24,14 @@
 		<h2>Highest Score</h2>
 		<p>
 			The highest score is currently {{ bestMatch.0 }},
-			scored by {{ bestMatch.1.firstName }} {{ bestMatch.1.surname }}
-			against {{ bestMatch.2.firstName }} {{ bestMatch.2.surname }} on {{ bestMatch.3 }}.
+			scored by {{ bestMatch.1.name }}
+			against {{ bestMatch.2.name }} on {{ bestMatch.3 }}.
 		</p>
 		<h2>Lowest Score</h2>
 		<p>
 			The lowest score is currently {{ worstMatch.0 }},
-			scored by {{ worstMatch.1.firstName }} {{ worstMatch.1.surname }}
-			against {{ worstMatch.2.firstName }} {{ worstMatch.2.surname }} on {{ worstMatch.3 }}.
+			scored by {{ worstMatch.1.name }}
+			against {{ worstMatch.2.name }} on {{ worstMatch.3 }}.
 		</p>
 	</div>
 	<div class="col-sm-2"></div>

@@ -1,0 +1,15 @@
+spec:
+1. See who won each game - automatic counter
+2. See running table of winners by year eg Mick (of course) has won 9/10 games in 2021 
+3. See average score per player by year 
+4. Notes to record things like exceptionally high game or single word scores or using all letters in a single go. Can be a text box
+
+when submitting a score at the end of a match, add who won to the match record automatically to save headaches
+
+need to make a page for adding scores to the system
+	simplify by just having 4(5?) text fields instead of button to add/remove players?
+	maybe another page to actually enter each person's score? simpler maybe?
+	give a running total?
+	comments box for each person for showing good stuff
+	when game is finished, calculate winner, make a results screen
+	maybe a graph of score against time? could be fun to see

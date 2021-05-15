@@ -5,18 +5,6 @@
 	<div class="col-sm-6 text-center">
     <h1>{{ user.firstName }} {{ user.surname }}'s profile</h1>
     <table class="table table-striped">
-			<tr>
-        <td>Name:</td>
-        <td>{{ user.firstName }} {{ user.surname }}</td>
-      </tr>
-			<tr>
-        <td>Email address:</td>
-        <td>{{ user.email }}</td>
-      </tr>
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
       <tr>
         <td>Wins:</td>
         <td>{{ wins }}</td>
@@ -40,10 +28,6 @@
       <tr>
         <td>Achieved on:</td>
         <td>{{ bestMatch.2 }}</td>
-      </tr>
-      <tr>
-        <td>Against:</td>
-        <td>{{ bestMatch.1.firstName }} {{ bestMatch.1.surname }}</td>
       </tr>
     </table>
     <a href="../../edit/{{ user.pk }}" class="btn btn-primary">Edit</a>

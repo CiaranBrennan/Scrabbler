@@ -21,6 +21,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 	path('', views.index),
     path('profile/<int:userID>/', views.userProfile),
-    path('edit/<int:userID>/', views.editProfile),
-    path('create/', views.createProfile),
 ]
