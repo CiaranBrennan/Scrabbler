@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row" id="infoBox">
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8 text-center">
+  <h1>Welcome to Scrabbler!</br>{{title}}</h1>
+    <h2>Our Top Scorers</h2>
+    <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="text-center">Firstname</th>
+        <th class="text-center">Average Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for person in users %}
+      <tr>
+        <td><a href="profile/{{ person.0.pk }}">{{ person.0.firstName }} {{ person.0.surname }}</a></td>
+        <td>{{ person.1 }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+		<h2>Highest Score</h2>
+		<p>
+			The highest score is currently {{ bestMatch.0 }},
+			scored by {{ bestMatch.1.firstName }} {{ bestMatch.1.surname }}
+			against {{ bestMatch.2.firstName }} {{ bestMatch.2.surname }} on {{ bestMatch.3 }}.
+		</p>
+		<h2>Lowest Score</h2>
+		<p>
+			The lowest score is currently {{ worstMatch.0 }},
+			scored by {{ worstMatch.1.firstName }} {{ worstMatch.1.surname }}
+			against {{ worstMatch.2.firstName }} {{ worstMatch.2.surname }} on {{ worstMatch.3 }}.
+		</p>
+	</div>
+	<div class="col-sm-2"></div>
+</div>
+{% endblock %}

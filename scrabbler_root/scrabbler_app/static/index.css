@@ -1,0 +1,22 @@
+.navbar-brand {
+  color:white !important;
+}
+
+.nav a {
+  color:white !important;
+}
+
+#infoBox {
+  box-shadow: 5px 5px 5px gray;
+  background-color: white;
+  border-radius: 10px;
+  padding-bottom: 20px;
+}
+
+body {
+  background-color: rgb(230, 230, 230);
+}
+
+input {
+  /* margin-top: 10px; */
+}
