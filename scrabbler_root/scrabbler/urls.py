@@ -20,5 +20,5 @@ from scrabbler_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 	path('', views.index),
-    path('profile/<int:userID>/', views.userProfile),
+    path('profile/<int:userID>/', views.playerProfile),
 ]
