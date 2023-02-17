@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Match(models.Model):
 	datePlayed  = models.DateField("Date Played")
-	comments = models.CharField("Player Comments", max_length=300, blank=True, null=True)
+	comments 	= models.CharField("Player Comments", max_length=300, blank=True, null=True)
 
 class Player(models.Model):
 	forename = models.CharField("Forename", max_length=16)
@@ -13,3 +13,4 @@ class MatchScore(models.Model):
 	match 	 = models.ForeignKey(Match, on_delete=models.CASCADE)
 	player 	 = models.ForeignKey(Player, on_delete=models.CASCADE)
 	score 	 = models.SmallIntegerField("Score")
+	won		 = models.BooleanField("Won", default=False)

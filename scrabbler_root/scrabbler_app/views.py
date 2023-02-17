@@ -51,31 +51,26 @@ def index(request):
 def playerProfile(request, userID):
 	# Get player record and all of their score records
 	player = Player.objects.filter(pk = userID).first()
-	results = MatchScore.objects.filter(player = player).order_by("points")
+	results = MatchScore.objects.filter(player = player).order_by("score")
 
-	# print(results[0].match)
 	# Get a load of info about the player's scores
-	scoreStats = results.aggregate(Sum("points"), Avg("points"))
+	scoreStats = results.aggregate(Sum("score"), Avg("score"))
 	bestScore = results[len(results) - 1]
-	totalScore = scoreStats["points__sum"]
-	wins = 0
-	for result in results:
-		if result.match.winner == player.name:
-			wins += 1
+	totalScore = scoreStats["score__sum"]
+	wins = results.filter(won = True).count()
 
 	bestOpponent = MatchScore.objects.filter(match = bestScore.match).exclude(player = player).first()
-	bestMatch = [bestScore.points, bestOpponent.player, bestScore.match.datePlayed]
+	bestMatch = [bestScore.score, bestOpponent.player, bestScore.match.datePlayed]
 
 	# TODO: Add graph of average scores each year
-	print(player.name)
 
 	# Serve
-	return render(request, "Player.html", {"user":player,
+	return render(request, "profile.html", {"user":player,
 		"wins":wins,
 		"losses":results.count() - wins,
-		"avgScore":round(scoreStats["points__avg"]),
+		"avgScore":round(scoreStats["score__avg"]),
 		"bestMatch":bestMatch
 	})
 
-def NewMatch(request):
-	return render(request, "match.html")
+def addMatch(request):
+	return render(request, "addmatch.html")
