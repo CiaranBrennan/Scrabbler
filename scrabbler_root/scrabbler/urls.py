@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 	path('', views.index),
     path('profile/<int:userID>/', views.playerProfile),
+    path('addmatch/', views.addMatch),
 ]
