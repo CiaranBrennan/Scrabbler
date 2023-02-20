@@ -1,0 +1,15 @@
+#add-player {
+    background-color:green;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+    float: left;
+    margin-left: 25%;
+}
+
+#add-player-icon {
+    width: 32px;
+    height: 32px;
+}

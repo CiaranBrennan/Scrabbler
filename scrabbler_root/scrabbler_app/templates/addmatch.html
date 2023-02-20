@@ -1,15 +1,22 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
+<link href="{% static 'css/addmatch.css' %}" rel="stylesheet">
 <div class="row" id="infoBox">
 	<div class="col-sm-2"></div>
 	<div class="col-sm-8 text-center">
         <h1>Add a Match</h1>
+        <!-- TODO: Add a button to the form to add a new player in the match -->
         <form action="POST">
             <label for="fname">First name: </label>
             <input type="text" id="fname" value="forename"><br>
             <label for="sname">Surname: </label>
-            <input type="text" id="sname" value="surname">
-            <p>Did this user win? <input type="checkbox" value="userWon"></p>
+            <input type="text" id="sname" value="surname"><br><br>
+            <label for="fname">First name: </label>
+            <input type="text" id="fname" value="forename"><br>
+            <label for="sname">Surname: </label>
+            <input type="text" id="sname" value="surname"> <br>
+            <button id="add-player"><img src="{% static 'images/plus-icon.png' %}" id="add-player-icon" border="0"></button><br><br>
             <input type="submit" value="Save and return">
             <input type="submit" value="Save and continue">
         </form>
