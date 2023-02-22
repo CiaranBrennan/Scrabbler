@@ -8,15 +8,25 @@
         <h1>Add a Match</h1>
         <!-- TODO: Add a button to the form to add a new player in the match -->
         <form action="POST">
-            <label for="fname">First name: </label>
-            <input type="text" id="fname" value="forename"><br>
-            <label for="sname">Surname: </label>
-            <input type="text" id="sname" value="surname"><br><br>
-            <label for="fname">First name: </label>
-            <input type="text" id="fname" value="forename"><br>
-            <label for="sname">Surname: </label>
-            <input type="text" id="sname" value="surname"> <br>
-            <button id="add-player"><img src="{% static 'images/plus-icon.png' %}" id="add-player-icon" border="0"></button><br><br>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="{{ form.fname1.id_for_label }}">First name: </label>
+                    {{ form.fname1 }}
+                </div>
+                <div class="col-lg-6">
+                    <label id="snameField" for="{{ form.sname1.id_for_label }}">Surname: </label>
+                    {{ form.sname1 }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label id="scoreField" for="{{ form.score1.id_for_label }}">Score: </label>
+                </div>
+                <div class="col-lg-6">
+                    {{ form.score1 }}
+                </div>
+            </div>
+            <button id="add-player"><img src="{% static 'images/favicon.ico' %}" id="add-player-icon" border="0"></button><br><br>
             <input type="submit" value="Save and return">
             <input type="submit" value="Save and continue">
         </form>

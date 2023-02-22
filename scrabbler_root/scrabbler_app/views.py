@@ -8,6 +8,8 @@ from django.db.models import Avg, Max, Min, Sum
 from django.contrib import messages
 import matplotlib.pyplot as plt
 
+from .forms import AddMatchForm
+
 # Create your views here.
 def index(request):
 	# Get all players and scores
@@ -73,4 +75,18 @@ def playerProfile(request, userID):
 	})
 
 def addMatch(request):
-	return render(request, "addmatch.html")
+	if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+		form = AddMatchForm(request.POST)
+        # check whether it's valid:
+		if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+			return HttpResponseRedirect('/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+	else:
+		form = AddMatchForm()
+
+	return render(request, 'addmatch.html', {'form': form})
