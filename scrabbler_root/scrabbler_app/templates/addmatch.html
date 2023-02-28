@@ -1,36 +1,44 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<link href="{% static 'css/addmatch.css' %}" rel="stylesheet">
+<head>
+    <script src="{% static 'js/addmatch.js' %}"></script>
+    <script src="{% static 'js/jquery-3.6.3.js' %}"></script>
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('#playerFormsetContainer div').formset({
+                addText: "Add player",
+                deleteText: "Remove player"
+            });
+        })
+    </script>
+</head>
+
 <div class="row" id="infoBox">
 	<div class="col-sm-2"></div>
 	<div class="col-sm-8 text-center">
         <h1>Add a Match</h1>
-        <!-- TODO: Add a button to the form to add a new player in the match -->
-        <form action="POST">
-            <div class="row">
-                <div class="col-lg-6">
-                    <label for="{{ form.fname1.id_for_label }}">First name: </label>
-                    {{ form.fname1 }}
-                </div>
-                <div class="col-lg-6">
-                    <label id="snameField" for="{{ form.sname1.id_for_label }}">Surname: </label>
-                    {{ form.sname1 }}
-                </div>
+        <form id="playerFormsetContainer" method="post" action="">
+            {% csrf_token %}
+            {{ playerFormset.management_form }}
+            {% for form in playerFormset %}
+            <div id="{{ form.prefix }}-row">
+                {{ form.forename.label_tag }}
+                {{ form.forename }}
+                {{ form.surname.label_tag }}
+                {{ form.surname }}
+                <br />
+                {{ form.score.label_tag }}
+                {{ form.score }}
+                
             </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <label id="scoreField" for="{{ form.score1.id_for_label }}">Score: </label>
-                </div>
-                <div class="col-lg-6">
-                    {{ form.score1 }}
-                </div>
-            </div>
-            <button id="add-player"><img src="{% static 'images/favicon.ico' %}" id="add-player-icon" border="0"></button><br><br>
-            <input type="submit" value="Save and return">
-            <input type="submit" value="Save and continue">
+            {% endfor %}
+            <input type="submit"/>
         </form>
-	</div>
+    </div>
+</div>
 	<div class="col-sm-2"></div>
 </div>
 {% endblock %}

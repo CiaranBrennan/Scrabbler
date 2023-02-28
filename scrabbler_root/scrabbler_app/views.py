@@ -1,14 +1,17 @@
-from django.shortcuts import render
-from django.http import HttpResponse
 from datetime import date
-from scrabbler_app.models import Player, MatchScore, Match
-from .forms import EditForm, CreateForm
-from django.http import HttpResponseRedirect
-from django.db.models import Avg, Max, Min, Sum
-from django.contrib import messages
-import matplotlib.pyplot as plt
 
-from .forms import AddMatchForm
+import matplotlib.pyplot as plt
+from django.contrib import messages
+from django.db.models import Avg, Max, Min, Sum
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView
+from scrabbler_app.models import Match, MatchScore, Player
+
+from .forms import AddMatchForm, CreateForm, EditForm, AddMatchFormSet
+from .models import MatchScore
+
 
 # Create your views here.
 def index(request):
@@ -74,19 +77,23 @@ def playerProfile(request, userID):
 		"bestMatch":bestMatch
 	})
 
+# def addMatch(request):
+# 	if request.method == 'POST':
+#         # create a form instance and populate it with data from the request:
+# 		form = AddMatchForm(request.POST)
+#         # check whether it's valid:
+# 		if form.is_valid():
+#             # process the data in form.cleaned_data as required
+#             # ...
+#             # redirect to a new URL:
+# 			return HttpResponseRedirect('/thanks/')
+
+#     # if a GET (or any other method) we'll create a blank form
+# 	else:
+# 		form = AddMatchForm()
+
+# 	return render(request, 'addmatch.html', {'form': form})
+
 def addMatch(request):
-	if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-		form = AddMatchForm(request.POST)
-        # check whether it's valid:
-		if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-			return HttpResponseRedirect('/thanks/')
-
-    # if a GET (or any other method) we'll create a blank form
-	else:
-		form = AddMatchForm()
-
-	return render(request, 'addmatch.html', {'form': form})
+	playerFormset = AddMatchFormSet()
+	return render(request, "addmatch.html", { 'playerFormset': playerFormset })
