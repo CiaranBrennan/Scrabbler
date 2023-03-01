@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 <head>
+    <link  href="{% static 'css/addmatch.css' %}" rel="stylesheet" type="text/css">
     <script src="{% static 'js/addmatch.js' %}"></script>
     <script src="{% static 'js/jquery-3.6.3.js' %}"></script>
     <script src="{% static 'js/jquery.formset.js' %}"></script>
@@ -9,8 +10,8 @@
     <script type="text/javascript">
         $(function() {
             $('#playerFormsetContainer div').formset({
-                addText: "Add player",
-                deleteText: "Remove player"
+                addText: "",
+                deleteText: ""
             });
         })
     </script>
@@ -32,7 +33,7 @@
                 <br />
                 {{ form.score.label_tag }}
                 {{ form.score }}
-                
+                <br />
             </div>
             {% endfor %}
             <input type="submit"/>

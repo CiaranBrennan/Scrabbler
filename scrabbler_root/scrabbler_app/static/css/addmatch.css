@@ -33,4 +33,23 @@ label {
     float: right;
 }
 
-input[id^='id_score']{float: left;}
+.dynamic-form {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.add-row {
+    padding: 6px 12px;
+    background:url(../img/plusIcon.png) no-repeat;
+    background-size: 24px;
+}
+
+.delete-row {
+    position:absolute;
+    top: 0;
+    left: 100%;
+    padding: 12px 12px;
+    background:url(../img/minusIcon.png) no-repeat;
+    background-size: 24px;
+
+}

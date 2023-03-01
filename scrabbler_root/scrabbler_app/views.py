@@ -77,23 +77,6 @@ def playerProfile(request, userID):
 		"bestMatch":bestMatch
 	})
 
-# def addMatch(request):
-# 	if request.method == 'POST':
-#         # create a form instance and populate it with data from the request:
-# 		form = AddMatchForm(request.POST)
-#         # check whether it's valid:
-# 		if form.is_valid():
-#             # process the data in form.cleaned_data as required
-#             # ...
-#             # redirect to a new URL:
-# 			return HttpResponseRedirect('/thanks/')
-
-#     # if a GET (or any other method) we'll create a blank form
-# 	else:
-# 		form = AddMatchForm()
-
-# 	return render(request, 'addmatch.html', {'form': form})
-
 def addMatch(request):
 	playerFormset = AddMatchFormSet()
 	return render(request, "addmatch.html", { 'playerFormset': playerFormset })
