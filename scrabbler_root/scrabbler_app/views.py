@@ -3,14 +3,15 @@ from datetime import date
 import matplotlib.pyplot as plt
 from django.contrib import messages
 from django.db.models import Avg, Max, Min, Sum
+from django.forms import formset_factory
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from scrabbler_app.models import Match, MatchScore, Player
 
-from .forms import AddMatchForm, CreateForm, EditForm, AddMatchFormSet
-from .models import MatchScore
+from .forms import MatchPlayerForm, CreateForm, EditForm, MatchPlayerForm, MatchModelForm
+from .models import MatchScore, Match
 
 
 # Create your views here.
@@ -78,5 +79,19 @@ def playerProfile(request, userID):
 	})
 
 def addMatch(request):
-	playerFormset = AddMatchFormSet()
-	return render(request, "addmatch.html", { 'playerFormset': playerFormset })
+	playerFormset = formset_factory(MatchPlayerForm, extra=0, min_num=2, max_num=4, can_delete=True)
+	matchModel = Match
+	matchForm = MatchModelForm
+
+	if request.method == 'POST':
+			playerInfoForm = playerFormset(request.POST, request.FILES)
+			matchInfoForm = matchForm(request.POST, request.FILES)
+			if playerInfoForm.is_valid() and matchInfoForm.is_valid():
+				playerInfo = playerInfoForm.cleaned_data
+				matchInfo = matchInfoForm.cleaned_data
+				print(playerInfo)
+				print(matchInfo)
+				pass
+			else:
+				playerInfoForm = playerFormset()
+	return render(request, "addmatch.html", { 'playerFormset': playerFormset, "matchForm": matchForm })

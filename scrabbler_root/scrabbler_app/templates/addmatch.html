@@ -23,6 +23,7 @@
         <h1>Add a Match</h1>
         <form id="playerFormsetContainer" method="post" action="">
             {% csrf_token %}
+            {{ matchForm.datePlayed }}
             {{ playerFormset.management_form }}
             {% for form in playerFormset %}
             <div id="{{ form.prefix }}-row">
@@ -36,6 +37,7 @@
                 <br />
             </div>
             {% endfor %}
+            {{ matchForm.comments }}
             <input type="submit"/>
         </form>
     </div>
