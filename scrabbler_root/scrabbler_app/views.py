@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 
-from .forms import MatchPlayerForm, CreateForm, EditForm, MatchPlayerForm, MatchModelForm
+from .forms import MatchPlayerForm, MatchPlayerForm, MatchModelForm, CreatePlayerForm
 from .models import MatchScore, Match, Player
 
 
@@ -24,7 +24,6 @@ def index(request):
         # Get average score of each player
         for player in players:
             playerScore = results.filter(player=player)
-            print(playerScore)
             if len(playerScore) > 0:
                 avgScore = playerScore.aggregate(Avg("score"))
                 playerList.append([
@@ -98,6 +97,24 @@ def playerProfile(request, userID):
         "totalScore": totalScore
     })
 
+def addPlayer (request):
+    errors = ""
+    playerForm = CreatePlayerForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        if playerForm.is_valid():
+            playerInfo = playerForm.cleaned_data
+            newPlayer = Player(
+                forename = playerInfo["forename"],
+                surname  = playerInfo["surname"]
+            )
+            newPlayer.save()
+            print(playerInfo)
+        else:
+            errors = playerForm.errors
+    return render(request, "addplayer.html", {
+        "playerForm": playerForm,
+        "errors": errors
+    })
 
 def addMatch(request):
     playerFormset = formset_factory(
@@ -108,6 +125,7 @@ def addMatch(request):
         can_delete = True
     )
     matchForm = MatchModelForm
+    error = ""
 
     if request.method == 'POST':
         playerInfoForm = playerFormset(request.POST, request.FILES)
@@ -122,14 +140,12 @@ def addMatch(request):
             playerRecords = []
             winners = []
             for player in playerInfo:
-                playerRecord = Player.objects.filter(
-                    forename = player["forename"], surname = player["surname"]).first()
-                playerRecords.append(playerRecord)
+                playerRecords.append(player)
                 if player["score"] > topScore:
-                    winners = [playerRecord]
+                    winners = [player]
                     topScore = player["score"]
                 elif player["score"] == topScore:
-                    winners.append(playerRecord)
+                    winners.append(player)
 
             # Add the match record to the database
             newMatch = Match(
@@ -142,15 +158,15 @@ def addMatch(request):
             for i in range(0, len(playerInfo)):
                 newMatchScore = MatchScore(
                     match = newMatch,
-                    player =playerRecords[i],
+                    player = playerRecords[i]["name"],
                     score = playerInfo[i]["score"],
                     won = True if playerRecords[i] in winners else False
                 )
                 newMatchScore.save()
-            pass
         else:
-            playerInfoForm = playerFormset()
+            error = "Please make sure that all fields are filled out!"
     return render(request, "addmatch.html", {
-        'playerFormset': playerFormset,
-        "matchForm": matchForm
+        "playerFormset": playerFormset,
+        "matchForm": matchForm,
+        "error": error
     })

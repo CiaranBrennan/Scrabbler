@@ -22,4 +22,5 @@ urlpatterns = [
 	path('', views.index),
     path('profile/<int:userID>/', views.playerProfile),
     path('addmatch/', views.addMatch, name="addmatch"),
+    path('addplayer/', views.addPlayer, name="addplayer"),
 ]

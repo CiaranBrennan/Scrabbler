@@ -1,0 +1,22 @@
+.navbar-brand {
+  color:#fda !important;
+}
+
+.nav a {
+  color: #fda !important;
+}
+
+.navbar {
+  background-color: rgb(0, 46, 18);
+}
+
+#infoBox {
+  box-shadow: 5px 5px 5px gray;
+  background-color: #fda;
+  border-radius: 10px;
+  padding-bottom: 20px;
+}
+
+body {
+  background-color: #052;
+}

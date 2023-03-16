@@ -42,6 +42,7 @@ label {
     padding: 6px 12px;
     background:url(../img/plusIcon.png) no-repeat;
     background-size: 24px;
+    outline: 2px solid gray;
 }
 
 .delete-row {
@@ -51,5 +52,4 @@ label {
     padding: 12px 12px;
     background:url(../img/minusIcon.png) no-repeat;
     background-size: 24px;
-
 }
