@@ -1,37 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="row" id="infoBox">
-	<div class="col-sm-3"></div>
-	<div class="col-sm-6 text-center">
-    <h1>{{ user.forename }} {{ user.surname }}'s profile</h1>
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6 text-center">
+    <h1>{{ player }}'s profile</h1>
     <table class="table table-striped">
-      <tr>
-        <td>Wins:</td>
-        <td>{{ wins }}</td>
-      </tr>
-      <tr>
-        <td>Losses:</td>
-        <td>{{ losses }}</td>
-      </tr>
-      <tr>
-        <td>Average score:</td>
-        <td>{{ avgScore }}</td>
-      </tr>
-      <tr>
-				<td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Best score:</td>
-        <td>{{ bestMatch.0 }}</td>
-      </tr>
-      <tr>
-        <td>Achieved on:</td>
-        <td>{{ bestMatch.2 }}</td>
-      </tr>
+        <tr>
+            <td>Wins:</td>
+            <td>{{ wins }}</td>
+        </tr>
+        <tr>
+            <td>Losses:</td>
+            <td>{{ losses }}</td>
+        </tr>
+        <tr>
+            <td>Average score:</td>
+            <td>{{ avgScore }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Best score:</td>
+            <td>{{ bestMatch.0 }}</td>
+        </tr>
+        <tr>
+            <td>Achieved on:</td>
+            <td>{{ bestMatch.2 }}</td>
+        </tr>
     </table>
     <a href="../../edit/{{ user.pk }}" class="btn btn-primary">Edit</a>
-	</div>
-	<div class="col-sm-3"></div>
+    </div>
+    <div class="col-sm-3"></div>
 </div>
 {% endblock %}

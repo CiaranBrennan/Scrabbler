@@ -26,38 +26,33 @@ def index(request):
             playerScore = results.filter(player=player)
             if len(playerScore) > 0:
                 avgScore = playerScore.aggregate(Avg("score"))
-                playerList.append([
-                    player,
-                    round(avgScore["score__avg"])
-                ])
+                playerList.append({
+                    "name": player,
+                    "averageScore": round(avgScore["score__avg"])
+                })
+        # Sort players by their average score
         playerList = sorted(
-            playerList, key=lambda player: player[1], reverse=True)
-
+            playerList, key=lambda player: player["averageScore"], reverse=True)
+        
         # Get info about the games with the highest and lowest scores
         worstScore = results[0]
-        bestScore = results[len(results) - 1]
-        bestOpponent = MatchScore.objects.filter(
-            match=bestScore.match).exclude(player=bestScore.player).first()
-        worstOpponent = MatchScore.objects.filter(
-            match=worstScore.match).exclude(player=worstScore.player).first()
+        bestScore = results[len(results)-1]
 
-        bestMatch = [
-            bestScore.score,
-            bestScore.player,
-            bestOpponent.player,
-            bestScore.match.datePlayed
-        ]
-        worstMatch = [
-            worstScore.score,
-            worstScore.player,
-            worstOpponent.player,
-            worstScore.match.datePlayed
-        ]
+        bestMatch = {
+            "score": bestScore.score,
+            "name": bestScore.player,
+            "datePlayed": bestScore.match.datePlayed
+        }
+        worstMatch = {
+            "score": worstScore.score,
+            "name": worstScore.player,
+            "datePlayed": worstScore.match.datePlayed
+        }
 
         # Serve all the information
         return render(request, "index.html", {
             "data": True,
-            "users": playerList,
+            "players": playerList,
             "bestMatch": bestMatch,
             "worstMatch": worstMatch
         })
@@ -89,12 +84,45 @@ def playerProfile(request, userID):
 
     # Serve
     return render(request, "profile.html", {
-        "user": player,
+        "player": player,
         "wins": wins,
         "losses": results.count() - wins,
         "averageScore": round(scoreStats["score__avg"]),
         "bestMatch": bestMatch,
         "totalScore": totalScore
+    })
+
+def match(request, matchID):
+    # Get player record and all of their score records
+    matchQuery = Match.objects.filter(pk=matchID).first()
+    playersQuery = MatchScore.objects.filter(match=matchQuery).order_by("-score")
+
+    players = []
+    winners = []
+    winnersQuery = playersQuery.filter(won=True)
+
+    for player in playersQuery:
+        players.append(
+            {
+                "id": player.player.pk,
+                "name": player.player,
+                "score": player.score
+            }
+        )
+        if player.won:
+            winners.append("{}".format(player.player))
+
+    if len(winners) < 3:
+        winners =  ' and '.join(winners)
+    else:
+        winners = ', '.join(winners[:-1]) + ', and ' + winners[-1]
+    
+    winners
+
+    return render(request, "match.html", {
+        "matchInfo": matchQuery,
+        "playerInfo": players,
+        "winners": winners
     })
 
 def addPlayer (request):

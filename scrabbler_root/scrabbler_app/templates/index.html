@@ -15,23 +15,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for person in users %}
+                    {% for player in players %}
                     <tr>
-                        <td><a href="profile/{{ person.0.pk }}">{{ person.0.forename }} {{ person.0.surname }}</a></td>
-                        <td>{{ person.1 }}</td>
+                        <td><a href="profile/{{ player.player.pk }}">{{ player.name }}</a></td>
+                        <td>{{ player.averageScore }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
             <h2>Highest Score</h2>
             <p>
-                The highest score is currently {{ bestMatch.0 }},
-                scored by {{ bestMatch.1.forename }} {{ bestMatch.1.surname }} on {{ bestMatch.3 }}.
+                The highest score is currently {{ bestMatch.score }},
+                scored by {{ bestMatch.name }} on {{ bestMatch.datePlayed }}.
             </p>
             <h2>Lowest Score</h2>
             <p>
-                The lowest score is currently {{ worstMatch.0 }},
-                scored by {{ worstMatch.1.forename }} {{ worstMatch.1.surname }} on {{ worstMatch.3 }}.
+                The lowest score is currently {{ worstMatch.score }},
+                scored by {{ worstMatch.name }} on {{ worstMatch.datePlayed }}.
             </p>
         </div>
         {% else %}

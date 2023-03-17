@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<head>
+    <link href="{% static 'css/match.css' %}" rel="stylesheet" type="text/css">
+</head>
+<div class="row" id="infoBox">
+	<div class="col-sm-3"></div>
+	<div class="col-sm-6 text-center">
+    <h1>{{ matchInfo.datePlayed }}</h1>
+    <h2> {{ winners }} won!</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Player</th>
+            <th>Score</th>
+        </tr>
+        {% for player in playerInfo %}
+            <tr>
+                <td><a href="../../profile/{{ player.id }}">{{ player.name }}</a></td>
+                <td>{{ player.score }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <p>{{ matchInfo.comments }}</p>
+	</div>
+	<div class="col-sm-3"></div>
+</div>
+{% endblock %}
