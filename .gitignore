@@ -6,3 +6,4 @@ Database Diagram.png
 __pycache__
 db.sqlite3
 media
+.env
