@@ -27,10 +27,8 @@
             {{ playerFormset.management_form }}
             {% for form in playerFormset %}
             <div id="{{ form.prefix }}-row">
-                {{ form.forename.label_tag }}
-                {{ form.forename }}
-                {{ form.surname.label_tag }}
-                {{ form.surname }}
+                {{ form.name.label_tag }}
+                {{ form.name }}
                 <br />
                 {{ form.score.label_tag }}
                 {{ form.score }}
@@ -38,6 +36,9 @@
             </div>
             {% endfor %}
             {{ matchForm.comments }}
+            <br />
+            {{ error }}
+            <br />
             <input type="submit"/>
         </form>
     </div>
