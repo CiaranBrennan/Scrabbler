@@ -201,8 +201,8 @@ def addMatch(request):
 
 def searchMatch(request):
     matchRecords = Match.objects.order_by("datePlayed")
-    if fergsdhifuasbfhudsakb ADD A SEARCH FIKLTERING
-    sortedMatchRecords = 
+    # if fergsdhifuasbfhudsakb ADD A SEARCH FIKLTERING
+    # sortedMatchRecords = 
     matches = []
     searchMatchForm = SearchMatchForm(request.GET, request.FILES)
     for match in matchRecords:
