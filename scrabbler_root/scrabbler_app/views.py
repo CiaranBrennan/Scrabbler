@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 
-from .forms import MatchPlayerForm, MatchPlayerForm, MatchModelForm, CreatePlayerForm
+from .forms import MatchPlayerForm, MatchPlayerForm, MatchModelForm, CreatePlayerForm, SearchMatchForm
 from .models import MatchScore, Match, Player
 
 
@@ -197,4 +197,21 @@ def addMatch(request):
         "playerFormset": playerFormset,
         "matchForm": matchForm,
         "error": error
+    })
+
+def searchMatch(request):
+    matchRecords = Match.objects.order_by("datePlayed")
+    if fergsdhifuasbfhudsakb ADD A SEARCH FIKLTERING
+    sortedMatchRecords = 
+    matches = []
+    searchMatchForm = SearchMatchForm(request.GET, request.FILES)
+    for match in matchRecords:
+        playersInMatch = MatchScore.objects.filter(match = match).order_by("-score")
+        matches.append({
+            "matchInfo": match,
+            "playerInfo": playersInMatch            
+        })
+    return render(request, "searchmatch.html", {
+        "matches": matches,
+        "searchForm": searchMatchForm
     })

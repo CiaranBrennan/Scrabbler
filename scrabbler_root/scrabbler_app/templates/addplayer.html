@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row" id="infoBox">
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8 text-center">
+        <h1>Add a User</h1>
+        <form id="playerCreateForm" method="post" action="">
+            {% csrf_token %}
+            {{ errors }}
+            {{ playerForm.forename.label_tag }}
+            {{ playerForm.forename }}
+            <br />
+            {{ playerForm.surname.label_tag }}
+            {{ playerForm.surname }}
+            <br />
+            <input type="submit"/>
+        </form>
+    </div>
+</div>
+	<div class="col-sm-2"></div>
+</div>
+
+{% endblock %}
